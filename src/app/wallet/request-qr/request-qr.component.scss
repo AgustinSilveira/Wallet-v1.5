@@ -94,11 +94,9 @@ aside, .info-main {
     }
 }
 
-@media screen and (max-height: 650px) {
-    .qr-aside {
-        height: 200px;
-    }
-    .container-aside {
-        height: 200px;
+@media screen and (max-height: 660px) {
+    .img-back {
+        height: 50px;
+        margin-bottom: 15px;
     }
 }
