@@ -9,26 +9,29 @@
   <section>
     <div id="container-section">
 
-      <div>
+      <div class="info-register">
         <p>Por favor provéenos los siguientes datos para tu nueva cuenta</p>
       </div>
-      <div class="container-login">
-        <input type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="username" required autocomplete="username">
-        <input type="email" placeholder="Correo electrónico" [(ngModel)]="email" name="email" required autocomplete="email">
-        <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" required autocomplete="current-password">
-        <input type="file" (change)="onFileSelected($event)" accept="image/*">
-
-
-
-        <div class="text-ion">
+      
+      <div class="container-login flex flex-col items-center">
+        <div id="container-user" class="relative mb-4 overflow-hidden rounded-full bg-gray-300 d-flex align-justyfy-center">
+          <img [src]="profileImageUrl" alt="Profile Image" class="w-full h-full object-cover">
+          <input type="file" (change)="onFileSelected($event)" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer">
+        </div>
+      
+        <input type="text" placeholder="Nombre de usuario" name="username" [(ngModel)]="username" required autocomplete="username" class="mb-2">
+        <input type="email" placeholder="Correo electrónico" [(ngModel)]="email" name="email" required autocomplete="email" class="mb-2">
+        <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" required autocomplete="current-password" class="mb-2">
+      
+        <div class="text-ion mb-2">
           <ion-checkbox [(ngModel)]="acceptedTerms" name="acceptedTerms" required></ion-checkbox>
           <p>Al crear esta cuenta confirmo que
             he leído y acepto los <a href="#">términos y condiciones</a></p>
         </div>
-       
-        
+      
         <button (click)="signUp()" [disabled]="!acceptedTerms">Registrarme</button>
       </div>
+      
       <div class="login-with">
         <button class="login-google" (click)="signInWithGoogle()"> <img src="../../assets/icon/Google Icon.svg" alt=""> Google</button>
         <button class="login-facebook"> <img src="../../assets/icon/Facebook Icon.svg" alt=""> Facebook</button>

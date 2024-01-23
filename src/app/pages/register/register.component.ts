@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { IonLoading } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
@@ -18,10 +18,16 @@ export class RegisterComponent {
   selectedFile: File | null = null;
   loadingActive: boolean = false;
 
+  profileImageUrl: string = 'assets/user.png';
+  fileInput: HTMLInputElement;
+
   constructor(
     private authService: AuthService,
-    private loadingController: LoadingController
-    ) { }
+    private loadingController: LoadingController,
+    private el: ElementRef,
+    ) {
+      this.fileInput = this.el.nativeElement.querySelector('#file-input');
+     }
 
   signInWithGoogle() {
     this.authService.signInGoogle();
@@ -30,8 +36,18 @@ export class RegisterComponent {
 
   // img del register
   onFileSelected(event: any): void {
-    // Obtener el archivo seleccionado
-    this.selectedFile = event.target.files[0] as File;
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.profileImageUrl = reader.result as string;
+      };
+
+      reader.readAsDataURL(file);
+    }
   }
 
   onLoadingDismissed() {

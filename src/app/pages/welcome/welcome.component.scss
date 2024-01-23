@@ -40,6 +40,7 @@ section {
 
 #container-section {
     text-align: center;
+    color: black;
 }
 
 #container-section p {
@@ -66,10 +67,13 @@ section {
 #container-footer {
     text-align: center;
     padding: 30px;
+    color: black;
 }
 
-@media screen and (max-height: 222px) {
-
+@media screen and (max-height: 626px) {
+    #container-main img {
+        max-width: 200px;
+    }
 }
 
 

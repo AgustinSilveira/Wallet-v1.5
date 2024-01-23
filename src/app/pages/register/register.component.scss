@@ -1,7 +1,7 @@
 body {
     height: 100vh;
     width: 100%;
-    background-color: #EAF9E7;
+    background: #E5EFE3;
 }
 
 #container-main {
@@ -11,6 +11,11 @@ body {
 
 #container-main img {
    z-index: 0;
+}
+
+#container-user {
+    width: 90px;
+    height: 90px;
 }
 
 #container-section {
@@ -142,15 +147,20 @@ ion-checkbox {
     margin-top: 5px; 
   }
 
-  @media screen and (max-height: 828px) {
+  .login-with {
+    display: none;
+  }
+
+  @media screen and (max-height: 800px) {
     #container-section {
         transform: translateY(0px);
+        background: #E5EFE3;
     }
     #container-main img {
         display: none;
     }
     body {
-        background-color: white;
+        background: #E5EFE3;
     }
 }
 
@@ -167,4 +177,10 @@ ion-checkbox {
     .text-ion {
         margin: 0px;
     }
+}
+
+@media screen and (max-height: 843px) {
+     .info-register p {
+         display: none;
+     }
 }
