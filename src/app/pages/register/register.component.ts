@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { IonLoading } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
@@ -18,37 +18,28 @@ export class RegisterComponent {
   selectedFile: File | null = null;
   loadingActive: boolean = false;
 
-  profileImageUrl: string = 'assets/user.png';
-  fileInput: HTMLInputElement;
-
   constructor(
     private authService: AuthService,
-    private loadingController: LoadingController,
-    private el: ElementRef,
-    ) {
-      this.fileInput = this.el.nativeElement.querySelector('#file-input');
-     }
+    private loadingController: LoadingController
+    ) { }
 
   signInWithGoogle() {
     this.authService.signInGoogle();
   }
   
 
-  // img del register
-  onFileSelected(event: any): void {
-    const fileInput = event.target as HTMLInputElement;
-    const file = fileInput.files?.[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        this.profileImageUrl = reader.result as string;
-      };
-
-      reader.readAsDataURL(file);
+  getSelectedFileUrl(): string | null {
+    if (this.selectedFile) {
+      return URL.createObjectURL(this.selectedFile);
     }
+    return null;
   }
+
+  onFileSelected(event: any): void {
+    // Obtener el archivo seleccionado
+    this.selectedFile = event.target.files[0] as File;
+  }
+
 
   onLoadingDismissed() {
     // Esta función se llamará cuando el componente de carga se cierre
@@ -76,7 +67,7 @@ export class RegisterComponent {
       // Muestra el componente de carga
       const loading = await this.loadingController.create({
         message: 'Registrando...',
-        duration: 2000,
+        duration: 3000,
         spinner: 'dots',
         backdropDismiss: false,
       });
